@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 class PostImage < ApplicationRecord
+  VARIANTS = {
+    thumbnail: { width: 150, height: 150, crop: :fill },
+    thumbnail_large: { width: 300, height: 300, crop: :fill },
+    gallery: { width: 500, height: 500, crop: :fill },
+  }
+
   class << self
     def upload_to_cloudinary_folder
       if Rails.env.test?
