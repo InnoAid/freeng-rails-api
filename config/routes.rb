@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: ->(env) { ['200', {}, ['Freeng API']] }
+
   post '/login', to: 'authentication#login'
 
   defaults(format: :json) do
