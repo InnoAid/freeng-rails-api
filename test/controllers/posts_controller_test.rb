@@ -72,6 +72,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     @a_post ||= Post.new(content: 'A book', address: 'Some Place') do |post|
       post.build_user(first_name: 'Recep', last_name: 'Toy')
       post.save!
+      post.images.create!(cloudinary_public_id: 'fake_id_of_img1', uploaded_by: post.user)
     end
   end
 

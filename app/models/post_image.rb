@@ -26,6 +26,7 @@ class PostImage < ApplicationRecord
   private
 
   def upload_to_cloudinary
+    return if Rails.env.test?
     return if uploaded_file.blank? || cloudinary_public_id.present?
 
     upload_response = Cloudinary::Uploader.upload(uploaded_file, folder: upload_to_cloudinary_folder)
@@ -33,6 +34,8 @@ class PostImage < ApplicationRecord
   end
 
   def delete_from_cloudinary
+    return if Rails.env.test?
+
     delete_response = Cloudinary::Uploader.destroy(cloudinary_public_id)
     raise 'Could not delete from Cloudinary' if delete_response.fetch('result') != 'ok'
   end
